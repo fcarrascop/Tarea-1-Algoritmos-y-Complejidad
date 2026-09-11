@@ -1,0 +1,28 @@
+Todas las mediciones se realizaron en un computador portátil con las especificaciones de hardware y software que se muestran en la Tabla \ref{figure:hardware}, sin otras cargas significativas, para que los tiempos reflejen el comportamiento de los algoritmos de la forma más precisa posible.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        Procesador & AMD Ryzen 7 5800H with Radeon Graphics \\
+        Núcleos / Hilos  & 8 / 16 \\
+        Frecuencia CPU min-max & 3.2 GHz - 4.4 GHz \\
+        Caché L1/L2/L3 & 64 KiB + 512 KiB por núcleo / 16 MiB compartida \\
+        Memoria RAM & 16 GB \\
+        Sistema operativo & Ubuntu 24.04.4 LTS \\
+        Compilador & g++ 13.3.0 (Ubuntu 13.3.0-6ubuntu2\textasciitilde{}24.04.1) \\
+        Flags de compilación & \texttt{-std=c++17 -O2 -Wall -Wextra} \\
+        Versión de Python & 3.12.3 \\
+        Versiones de librerías & numpy 2.4.2, pandas 3.0.0, matplotlib 3.10.8
+    \end{tabular}
+    \caption{Especificaciones del hardware y software utilizado para los experimentos.}
+    \label{figure:hardware}
+
+\end{table}
+
+Para los datasets, se usaron las familias de entradas descritas en el enunciado de la tarea. Para ordenamiento de arreglos unidimensionales, arreglos de tamaño $n \in \{ 10^1, 10^3, 10^5, 10^7 \}$ en 3 disposiciones (ascendente, descendente y aleatoria) y dos dominios de valores $D_1 = \{ 0, \dots , 9 \}$ y $D_7 = \{ 0, \dots , 10^7 \}$. Para multiplicación de matrices cuadradas, se usaron matrices de tamaño $n \times n $ con $n \in \{ 2^4, 2^6, 2^8, 2^{10} \}$ de 3 tipos (densa, diagonal y dispersa) y dos dominios de valores $D_0 = \{ 0, 1 \}$ y $D_{10} = \{ 0, \dots , 9 \}$.
+Cada configuración tiene 3 muestras aleatorias independientes, generadas con \texttt{numpy} mediante una semilla fija, de modo que todos los datos son reproducibles. Por su tamaño ($\sim$1{,}6 GB) los datasets no se incluyen en la entrega, solo el generador y la semilla.
+
+Cada medición corre en un proceso separado, para poder aislar el tiempo y la memoria de cada algoritmo de los demás. El tiempo se mide con la librería \texttt{chrono} de C++ alrededor de la llamada al algoritmo sin contar la escritura ni lectura de los archivos. La memoria se mide como el pico de RSS del proceso (\texttt{getrusage}, campo \texttt{ru\_maxrss}, en kB) menos una línea base tomada con la copia de trabajo ya en memoria; así el valor reportado corresponde a la memoria auxiliar que usa el algoritmo, sin contar la entrada.
+Cada medición tiene un límite de tiempo; al superarlo se marca como \texttt{NA} (por ejemplo, QuickSort en su caso cuadrático para $n = 10^7$). El resultado de cada configuración es el promedio de sus tres muestras.
+
+El código fuente, los scripts de medición y los generadores de gráficos están disponibles en \url{https://github.com/fcarrascop/Tarea-1-Algoritmos-y-Complejidad}.

@@ -1,0 +1,43 @@
+# --- binarios compilados ---
+code/sorting/sorting
+code/matrix_multiplication/matrix_multiplication
+*.o
+*.out
+
+# --- datasets y salidas generadas (grandes; se regeneran con `make inputs`,
+#     semilla fija 221 -> byte-identicos en cualquier maquina) ---
+code/sorting/data/array_input/*.txt
+code/sorting/data/array_output/*.txt
+code/matrix_multiplication/data/matrix_input/*.txt
+code/matrix_multiplication/data/matrix_output/*.txt
+
+# ...pero conservar los datasets de ejemplo chicos y los .gitkeep
+!code/sorting/data/array_input/10_*.txt
+!code/matrix_multiplication/data/matrix_input/16_*.txt
+!**/.gitkeep
+
+# mediciones y graficos SI se versionan (son chicos y el informe los referencia)
+!code/sorting/data/measurements/*.csv
+!code/sorting/data/plots/*.png
+!code/matrix_multiplication/data/measurements/*.csv
+!code/matrix_multiplication/data/plots/*.png
+
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- LaTeX (report/) ---
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
+# --- SO ---
+.DS_Store
